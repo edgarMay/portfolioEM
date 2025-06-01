@@ -1,0 +1,26 @@
+export const iconMap: Record<string, string | null> = {
+    'SwiftUI': '/logos/swiftui_org.png',
+    'Python': '/logos/python.png',
+    'ASP.NET Core': '/logos/dotnet.png',
+    'SQL Server': '/logos/sql-server_logo.jpg.webp',
+    'Power BI': '/logos/powerbi.png',
+    'React': '/logos/React.png',
+    'Node': '/logos/nodejs.png',
+    'Java Spring': '/logos/spring.png',
+    'Objective-C': '/logos/objectiveC.png',
+    'SQLite': '/logos/sqlite.jpg',
+    'Xcode': '/logos/xcode.png',
+    'C#': '/logos/csharp.png',
+    'HTML': '/logos/html5.png',
+    'CSS': '/logos/css.png',
+    'JS': '/logos/js.png',
+    'MongoDB': '/logos/mongodb.png',
+    'Firebase': '/logos/firebase.png',
+    'Power App': '/logos/powerapps.png',
+    'MS Access': '/logos/msAccess.png',
+    'Swift': '/logos/swift.png',
+    'XML': null,
+    'AI': null,
+    'Automation': null
+  };
+  
