@@ -11,7 +11,7 @@ function Hero() {
       {/* Contenido principal */}
       <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          I&apos;M Edgar,<br />
+          I&apos;m Edgar,<br />
           <span className="text-yellow-500">Software Engineer</span>
         </h1>
 
