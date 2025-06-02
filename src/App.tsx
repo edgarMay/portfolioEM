@@ -5,7 +5,7 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import Timeline from './components/Timeline.tsx';
 import Portfolio from './components/Portfolio.tsx';
 import AboutMe from './components/AboutMe.tsx';
-import ContactMe from './components/ContactMe'
+
 import './App.css';
 
 function App() {
@@ -18,7 +18,6 @@ function App() {
       <Timeline />       {/* ← aquí */}
       <ParallaxProvider>
       </ParallaxProvider>
-      <ContactMe />
     </ErrorBoundary>
   );
 }

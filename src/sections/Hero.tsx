@@ -34,8 +34,8 @@ function Hero() {
         </h2>
         {/* Frase adicional */}
         <a href="#contact" className="mt-4 inline-block px-6 py-2 bg-yellow-500 text-white font-semibold rounded-full hover:bg-yellow-400 transition">
-  Let's work together!
-</a>
+            Let's work together!
+        </a>
       </div>
 
       {/* Word-cloud flotante */}
