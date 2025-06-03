@@ -14,13 +14,13 @@ export type Project = {
   highlights?: string[];
 };
 
-import tappSearch from '../assets/projects/TAPP_search.png';
-import tappPlanned from '../assets/projects/MobileAppiOS.png';
-import brt from '../assets/projects/BRT.png';
-import pcapp from '../assets/projects/pcApp.png';
-import lomsA from '../assets/projects/LomsAudit.png';
-import imsShop from '../assets/projects/imsShop.png';
-import trialBOS from '../assets/projects/trialBOS.png';
+const tappSearch = '/projects/TAPP_search.png';
+const tappPlanned = '/projects/MobileAppiOS.png';
+const brt = '/projects/BRT.png';
+const pcapp = '/projects/pcApp.png';
+const lomsA = '/projects/LomsAudit.png';
+const imsShop = '/projects/imsShop.png';
+const trialBOS = '/projects/trialBOS.png';
 
 export const projects: Project[] = [
   {
