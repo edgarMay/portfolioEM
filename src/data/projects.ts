@@ -54,7 +54,7 @@ export const projects: Project[] = [
         caption: 'Pantalla de listas con drag-and-drop.',
       },
       {
-        img: '/projects/todo/2.webp',
+        img: brt,
         caption: 'Editor de tareas con voz y etiquetas.',
       },
     ],
