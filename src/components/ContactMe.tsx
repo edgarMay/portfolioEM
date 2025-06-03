@@ -20,7 +20,6 @@ export default function ContactMe() {
   // 3) Inicializa EmailJS una vez al montar el componente
   useEffect(() => {
     emailjs.init(PUBLIC_KEY)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Maneja cambios en los inputs/textarea
