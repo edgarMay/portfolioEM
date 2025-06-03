@@ -2,7 +2,7 @@
   "name": "edgarmayolm",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://edgarmayol.dev",
+  "homepage": "https://edgarmay.github.io/portfolioEM",
   "type": "module",
   "scripts": {
     "dev": "vite",
