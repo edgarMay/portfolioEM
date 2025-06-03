@@ -1,39 +1,60 @@
 name: Deploy to GitHub Pages
 
+# Se ejecuta sólo al hacer push sobre main
 on:
   push:
     branches:
       - main
 
+# Permisos mínimos que necesita el workflow
 permissions:
   pages: write
   id-token: write
 
 jobs:
-  build_and_deploy:
+  # 1) Job que compila y sube el 'dist' como artefacto de Pages
+  build_and_upload:
     runs-on: ubuntu-latest
 
     steps:
+      # 1.1 Clona el repositorio
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Use Node.js 18.x
+      # 1.2 Instala Node.js 18
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # 1.3 Instala dependencias (usa 'npm ci' si tienes package-lock.json subido)
       - name: Install dependencies
-        # aquí usa `npm ci` si ya subiste package-lock.json,
-        # o `npm install` si no
         run: npm ci
 
+      # 1.4 Construye el sitio (genera /dist)
       - name: Build production files
         run: npm run build
 
-      - name: Deploy to GitHub Pages
+      # 1.5 Configura GitHub Pages para que espere un artefacto
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v3
 
-      - name: Upload artifact
+      # 1.6 Sube la carpeta ./dist como “artifact” específico de Pages
+      - name: Upload dist/ to GitHub Pages
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./dist
+
+  # 2) Job que baja el artefacto y lo publica en GitHub Pages
+  deploy:
+    needs: build_and_upload
+    runs-on: ubuntu-latest
+
+    steps:
+      # 2.1 Descarga el artefacto que subió el job anterior
+      - name: Download Pages artifact
+        uses: actions/download-pages-artifact@v1
+
+      # 2.2 Publica ese contenido en gh-pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
