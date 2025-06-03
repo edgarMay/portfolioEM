@@ -1,12 +1,12 @@
 import Typewriter from 'typewriter-effect';
-import backgroundImage from '../assets/bttrbckgrnd2.png';
 import WordCloud from '../components/WordCloud';   // ← ajusta la ruta si es distinta
+
 
 function Hero() {
   return (
     <section
       className="relative w-full bg-cover bg-center px-4 py-80"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage: "url('/logos/bttrbckgrnd2.png')" }}
     >
       {/* Contenido principal */}
       <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
