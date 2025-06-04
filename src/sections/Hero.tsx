@@ -1,14 +1,41 @@
+// src/sections/Hero.tsx
+import { useState, useEffect, useRef } from 'react';
 import Typewriter from 'typewriter-effect';
-import WordCloud from '../components/WordCloud';   // ← ajusta la ruta si es distinta
+import WordCloud from '../components/WordCloud';
 
+export default function Hero() {
+  const heroRef = useRef<HTMLElement | null>(null);
+  const [shrink, setShrink] = useState(false);
 
-function Hero() {
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current) return;
+      const height = heroRef.current.offsetHeight;
+      setShrink(window.scrollY > height / 2);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // – Cuando no está “shrinked”: ocupa todo el ancho (w-full).
+  // – Cuando está “shrinked”: desaparece w-full y aplicamos mx-8 para dejar 2rem de margen a c/ lado,
+  //   además de rounded-3xl para esquinas más pronunciadas y overflow-hidden.
+  const sectionClasses = `
+    relative bg-cover bg-center px-4 py-80 transition-all duration-500
+    ${shrink
+      ? 'mx-8 rounded-3xl overflow-hidden'    // margen horizontal y bordes muy redondeados
+      : 'w-full'                              // ancho 100 % si no está “shrinked”
+    }
+  `;
+
   return (
     <section
-      className="relative w-full bg-cover bg-center px-4 py-80"
+      ref={heroRef}
+      id="home"
+      className={sectionClasses}
       style={{ backgroundImage: "url('/logos/bttrbckgrnd2.png')" }}
     >
-      {/* Contenido principal */}
+      {/* —Contenido principal— */}
       <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           I&apos;m Edgar,<br />
@@ -32,26 +59,22 @@ function Hero() {
             />
           </span>
         </h2>
-        {/* Frase adicional */}
-        <a href="#contact" className="mt-4 inline-block px-6 py-2 bg-yellow-500 text-white font-semibold rounded-full hover:bg-yellow-400 transition">
-            Let's work together!
+
+        <a
+          href="#contact"
+          className="mt-4 inline-block px-6 py-2 bg-yellow-500 text-white font-semibold rounded-full hover:bg-yellow-400 transition"
+        >
+          Let's work together!
         </a>
       </div>
 
-      {/* Word-cloud flotante */}
-      
-      {/* mobile */}
-<div className="md:hidden absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-30">
-  <WordCloud />
-</div>
-
-{/* desktop */}
-<div className="hidden md:block absolute bottom-10 left-1/2 w-[800px] h-[400px] opacity-40">
-  <WordCloud />
-</div>
-
+      {/* —WordCloud flotante— */}
+      <div className="md:hidden absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-30">
+        <WordCloud />
+      </div>
+      <div className="hidden md:block absolute bottom-10 left-1/2 w-[800px] h-[400px] opacity-40">
+        <WordCloud />
+      </div>
     </section>
   );
 }
-
-export default Hero;

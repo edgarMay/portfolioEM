@@ -4,3 +4,5 @@ dist
 .DS_Store
 # Caché interna de TypeScript/Vite
 tsconfig.app.tsbuildinfo
+.env.local
+

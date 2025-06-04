@@ -12,46 +12,35 @@ export default function ContactMe() {
     body: ''
   })
 
-  // 2) Tus IDs de EmailJS (cópialos EXACTO desde tu panel)
-  const SERVICE_ID  = 'service_2pjeya3'     // Tu Service ID real
-  const TEMPLATE_ID = 'template_vn6gq5q'    // Tu Template ID real
-  const PUBLIC_KEY  = 'qfSfduvF4liy9nVY2'  // Tu Public Key (User ID) real
+  // 2) Tus IDs de EmailJS
+  const SERVICE_ID  = 'service_2pjeya3'
+  const TEMPLATE_ID = 'template_vn6gq5q'
+  const PUBLIC_KEY  = 'qfSfduvF4liy9nVY2'
 
-  // 3) Inicializa EmailJS una vez al montar el componente
+  // 3) Inicializa EmailJS
   useEffect(() => {
     emailjs.init(PUBLIC_KEY)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Maneja cambios en los inputs/textarea
+  // Maneja cambios en inputs/textarea
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  // Esta es la función que se ejecuta cuando presionas "Send"
+  // Enviar formulario
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-
-    console.log('✅ handleSubmit invoked – proceeding to emailjs.send')
-    console.log('form object:', form)
-
-    // 4) Crea el objeto con las variables que tu plantilla de EmailJS espera
     const templateParams = {
       first_name: form.firstName,
       last_name:  form.lastName,
       email:      form.email,
       message:    form.body
     }
-    console.log('templateParams:', templateParams)
-
-    // 5) Envía el email utilizando emailjs.send(serviceID, templateID, templateParams)
     emailjs
       .send(SERVICE_ID, TEMPLATE_ID, templateParams)
       .then(
-        (response) => {
-          console.log('EmailJS success:', response.status, response.text)
+        () => {
           alert('✅ Mensaje enviado correctamente.')
-          // Limpia el formulario
           setForm({ firstName: '', lastName: '', email: '', body: '' })
         },
         (error) => {
@@ -72,18 +61,35 @@ export default function ContactMe() {
             Whether you have a question, a project idea, or just want to connect, feel free to reach out.
             I&apos;m always open to meaningful conversations and new opportunities.
           </p>
-          <a
-            href="mailto:edgar.mm09@gmail.com"
-            className="text-indigo-600 font-medium underline block mb-4"
-          >
-            edgar.mm09@gmail.com
-          </a>
-          <div className="flex gap-4 mt-6">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-instagram fa-2x"></i>
+
+          {/* Iconos personalizados */}
+          <div className="flex items-center gap-6 mt-4">
+            {/* Icono de Gmail */}
+            <a
+              href="mailto:edgar.mm09@gmail.com"
+              title="Enviar correo"
+              className="hover:opacity-80 transition"
+            >
+              <img
+                src="/logos/Gmail.png"
+                alt="Gmail"
+                className="w-12 h-10"
+              />
             </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-tiktok fa-2x"></i>
+
+            {/* Icono de LinkedIn */}
+            <a
+              href="https://www.linkedin.com/in/edgarmayol"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Ver mi LinkedIn"
+              className="hover:opacity-80 transition"
+            >
+              <img
+                src="/logos/linkedin.png"
+                alt="LinkedIn"
+                className="w-14 h-14"
+              />
             </a>
           </div>
         </div>
