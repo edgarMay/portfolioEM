@@ -4,7 +4,7 @@ import Typewriter from 'typewriter-effect';
 import WordCloud from '../components/WordCloud';
 
 export default function Hero() {
-  const heroRef = useRef<HTMLElement | null>(null);
+  const heroRef = useRef<HTMLDivElement | null>(null);
   const [shrink, setShrink] = useState(false);
 
   useEffect(() => {
@@ -17,58 +17,64 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // – Cuando no está “shrinked”: ocupa todo el ancho (w-full).
-  // – Cuando está “shrinked”: desaparece w-full y aplicamos mx-8 para dejar 2rem de margen a c/ lado,
-  //   además de rounded-3xl para esquinas más pronunciadas y overflow-hidden.
-  const sectionClasses = `
-    relative bg-cover bg-center px-4 py-80 transition-all duration-500
-    ${shrink
-      ? 'mx-8 rounded-3xl overflow-hidden'    // margen horizontal y bordes muy redondeados
-      : 'w-full'                              // ancho 100 % si no está “shrinked”
-    }
-  `;
-
   return (
-    <section
-      ref={heroRef}
-      id="home"
-      className={sectionClasses}
-      style={{ backgroundImage: "url('/logos/bttrbckgrnd2.png')" }}
-    >
-      {/* —Contenido principal— */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          I&apos;m Edgar,<br />
-          <span className="text-yellow-500">Software Engineer</span>
-        </h1>
+    /* — Este section será SOLO el fondo que cambia según el modo — */
+    <section id='home' className="bg-white dark:bg-slate-900">
+      {/*
+        — Aquí vamos a colocar un <div> que SÍ lleva background-image,
+          rounded-3xl/overflow-hidden cuando “shrink” sea true,
+          y al mismo tiempo recibe el ref para medir su altura.
+      */}
+      <div
+        ref={heroRef}
+        className={`
+          relative 
+          bg-cover bg-center   /* para la imagen de fondo */
+          px-4 py-80           /* padding vertical que define la “altura” inicial */
+          transition-all duration-500
+          ${shrink
+            ? 'mx-8 rounded-3xl overflow-hidden'
+            : 'w-full'
+          }
+        `}
+        style={{ backgroundImage: "url('/logos/bttrbckgrnd2.png')" }}
+      >
+        {/* — Contenido (texto, botones) dentro de ese div con fondo-imagen — */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            I&apos;m Edgar,<br />
+            <span className="text-yellow-500">Software Engineer</span>
+          </h1>
 
-        <h2 className="text-2xl md:text-3xl font-medium mt-4 flex justify-center items-center gap-2">
-          <span>I build</span>
-          <span className="text-yellow-300">
-            <Typewriter
-              options={{ loop: true }}
-              onInit={(tw) =>
-                tw
-                  .typeString('projects').pauseFor(1500).deleteAll()
-                  .typeString('solutions').pauseFor(1500).deleteAll()
-                  .typeString('APIs').pauseFor(1500).deleteAll()
-                  .typeString('software').pauseFor(1500).deleteAll()
-                  .typeString('mobile apps').pauseFor(1500)
-                  .start()
-              }
-            />
-          </span>
-        </h2>
+          <h2 className="text-2xl md:text-3xl font-medium mt-4 flex justify-center items-center gap-2">
+            <span>I build</span>
+            <span className="text-yellow-300">
+              <Typewriter
+                options={{ loop: true }}
+                onInit={(tw) =>
+                  tw
+                    .typeString('projects').pauseFor(1500).deleteAll()
+                    .typeString('solutions').pauseFor(1500).deleteAll()
+                    .typeString('APIs').pauseFor(1500).deleteAll()
+                    .typeString('software').pauseFor(1500).deleteAll()
+                    .typeString('mobile apps').pauseFor(1500)
+                    .start()
+                }
+              />
+            </span>
+          </h2>
 
-        <a
-          href="#contact"
-          className="mt-4 inline-block px-6 py-2 bg-yellow-500 text-white font-semibold rounded-full hover:bg-yellow-400 transition"
-        >
-          Let's work together!
-        </a>
+          <a
+            href="#contact"
+            className="mt-4 inline-block px-6 py-2 bg-yellow-500 
+                       text-white font-semibold rounded-full hover:bg-yellow-400 transition"
+          >
+            Let's work together!
+          </a>
+        </div>
       </div>
 
-      {/* —WordCloud flotante— */}
+      {/* — Dicho WordCloud “flotante” va fuera del div que maneja background-image — */}
       <div className="md:hidden absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-30">
         <WordCloud />
       </div>

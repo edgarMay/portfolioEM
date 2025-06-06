@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ===================== Variables para scrollbar en light/dark ===================== */
+:root {
+  --scrollbar-track: rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb: #6366f1; /* indigo-500 */
+}
+
+.dark {
+  --scrollbar-track: rgba(255, 255, 255, 0.2);
+  --scrollbar-thumb: #818cf8; /* indigo-400 */
+}
+
+/* ===================== Estilos Swiper Scrollbar ===================== */
+/* Pista (track) */
+.swiper-scrollbar {
+  background-color: var(--scrollbar-track);
+  border-radius: 0.25rem; /* opcional: redondeo */
+}
+
+/* Thumb (elemento que se arrastra) */
+.swiper-scrollbar .swiper-scrollbar-drag {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 0.25rem; /* opcional: redondeo */
+}

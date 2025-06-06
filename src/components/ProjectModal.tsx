@@ -17,7 +17,9 @@ export default function ProjectModal({ project, onClose }: Props) {
       {/* botón cerrar */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-5 text-3xl text-gray-500 hover:text-gray-300"
+        className="absolute top-4 right-5 text-3xl 
+                  text-gray-500 dark:text-gray-300 
+                  hover:text-gray-300 dark:hover:text-gray-500"
       >
         &times;
       </button>
@@ -27,14 +29,19 @@ export default function ProjectModal({ project, onClose }: Props) {
         <p className="text-xs font-semibold uppercase tracking-wider text-indigo-500">
           {project.category}
         </p>
-        <h3 className="text-3xl font-extrabold mt-2 mb-4">{project.name}</h3>
+        {/* Título del proyecto: adaptado a ambos modos */}
+        <h3 className="text-3xl font-extrabold mt-2 mb-4
+                      text-gray-900 dark:text-gray-100">
+          {project.name}
+        </h3>
         {project.summary && (
           <div className="mt-2 mb-4 text-gray-700 dark:text-gray-300 text-base">
-            <p className="font-semibold text-indigo-600 dark:text-indigo-400 mb-1">📌 Project Summary</p>
+            <p className="font-semibold text-indigo-600 dark:text-indigo-400 mb-1">
+              📌 Project Summary
+            </p>
             <p>{project.summary}</p>
           </div>
         )}
-
       </header>
 
       {/* bloques alternos */}
@@ -52,21 +59,18 @@ export default function ProjectModal({ project, onClose }: Props) {
 
 
         {project.slides.map((s, i) => (
-          /* Tarjeta con fondo gris tenue */
           <div key={i} className="bg-gray-100 dark:bg-slate-800 rounded-2xl p-8">
-            {/* Contenedor interno: columna en móvil, fila en desktop. 
-                En bloques impares usamos flex-row-reverse */}
             <div
               className={`flex flex-col md:flex-row ${
                 i % 2 === 1 ? 'md:flex-row-reverse' : ''
               } items-center gap-10`}
             >
-              {/* TEXTO */}
               <div className="md:w-1/2 text-lg leading-relaxed">
-                <p className="whitespace-pre-line">{s.caption}</p>
+                {/* Aquí añadimos color adaptativo */}
+                <p className="whitespace-pre-line text-gray-800 dark:text-gray-200">
+                  {s.caption}
+                </p>
               </div>
-
-              {/* IMAGEN */}
               <div className="md:w-1/2">
                 <img
                   src={s.img}
@@ -87,7 +91,9 @@ export default function ProjectModal({ project, onClose }: Props) {
           <a
             href={project.url}
             target="_blank"
-            className="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+            className="inline-block px-4 py-2 
+                      bg-indigo-600 text-white 
+                      rounded hover:bg-indigo-700 transition"
           >
             Ver demo
           </a>

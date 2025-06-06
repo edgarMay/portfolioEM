@@ -18,8 +18,9 @@ export default function Portfolio() {
   const selected  = projects.find(p => p.id === openId) ?? null;
 
   return (
-    <section id="portfolio" className="py-24">
-      <h2 className="text-center text-3xl font-extrabold mb-10">Projects</h2>
+    <section id="portfolio" className="py-24 bg-white dark:bg-slate-900">
+      <h2 className="text-center text-3xl font-extrabold mb-10 
+               text-gray-900 dark:text-gray-100">Projects</h2>
 
       {/* Tabs Apple-style */}
       <div className="flex justify-center gap-6 mb-12">
@@ -63,16 +64,22 @@ export default function Portfolio() {
       >
 
         {filtered.map(p => (
-          <SwiperSlide
-            key={p.id}
-            className="!h-auto w-full md:!w-[300px] flex-none"
-          >
+          <SwiperSlide key={p.id} className="!h-auto w-full md:!w-[300px] flex-none">
             <button
               onClick={() => setOpenId(p.id)}
-              className="flex flex-col justify-between h-[460px] w-full rounded-2xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl transition-all overflow-hidden border border-slate-200 dark:border-slate-700"
+              className="
+                flex flex-col justify-between h-[460px] w-full
+                rounded-2xl bg-white dark:bg-slate-800
+                shadow-md hover:shadow-xl transition-all overflow-hidden
+                border border-slate-200 dark:border-slate-700
+              "
             >
-              <h3 className="text-center text-base font-semibold mt-4">{p.name}</h3>
-          
+              {/* Aquí nos aseguramos de que el h3 sea un block de ancho completo y tenga text-center */}
+              <h3 className="w-full text-center text-base font-semibold mt-4
+                            text-gray-800 dark:text-gray-100">
+                {p.name}
+              </h3>
+              
               <div className="flex-1 px-4 py-4">
                 <img
                   src={p.slides[0].img}
@@ -81,11 +88,12 @@ export default function Portfolio() {
                 />
               </div>
 
-
-          
-              <span className="text-indigo-600 text-sm underline text-center mb-4">View</span>
+              <span className="text-indigo-600 text-sm underline text-center mb-4 dark:text-gray-100">
+                View
+              </span>
             </button>
           </SwiperSlide>
+
         
         ))}
       </Swiper>
