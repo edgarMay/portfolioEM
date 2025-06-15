@@ -81,11 +81,21 @@ export default function Portfolio() {
               </h3>
               
               <div className="flex-1 px-4 py-4">
-                <img
-                  src={p.slides[0].img}
-                  alt={p.name}
-                  className="w-full h-full object-contain rounded-xl"
-                />
+                {(() => {
+                  const firstImage = p.media.find(m => m.type === 'image');
+                  return firstImage ? (
+                    <img
+                      src={firstImage.src}
+                      alt={p.name}
+                      className="w-full h-full object-contain rounded-xl"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-xl">
+                      <span className="text-gray-500">No image</span>
+                    </div>
+                  );
+                })()}
+
               </div>
 
               <span className="text-indigo-600 text-sm underline text-center mb-4 dark:text-gray-100">

@@ -45,18 +45,20 @@ export default function TimelineItem({ job, idx }: Props) {
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.6 }}
       className={`relative mb-16 flex flex-col ${isLeft ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center`}
+      
     >
+      
       {/* Punto */}
       <motion.span
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.4 }}
-        className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0"
-      >
-        <span className="absolute inline-flex h-5 w-5 rounded-full bg-indigo-400 opacity-75 animate-ping" />
-        <span className="relative inline-flex h-5 w-5 rounded-full bg-indigo-600" />
-      </motion.span>
+  initial={{ scale: 0 }}
+  whileInView={{ scale: 1 }}
+  viewport={{ once: true, amount: 0.4 }}
+  transition={{ duration: 0.4 }}
+  className="absolute left-1/2 -translate-x-1/2 lg:static lg:left-auto lg:translate-x-0 z-20"
+>
+  <span className="absolute inline-flex h-5 w-5 rounded-full bg-indigo-400 opacity-75 animate-ping" />
+  <span className="relative inline-flex h-5 w-5 rounded-full bg-indigo-600" />
+</motion.span>
 
       {/* Tarjeta */}
       <div

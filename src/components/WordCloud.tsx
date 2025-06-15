@@ -46,8 +46,8 @@ export default function WordCloud() {
         padding={3}
         rotate={() => ~~(Math.random() * 2) * 90}
         spiral="archimedean"
-        width={800}
-        height={400}
+        width={isMobile ? 300 : 600}
+        height={isMobile ? 150 : 300}
         random={() => Math.random()}
       >
         {cloudWords =>

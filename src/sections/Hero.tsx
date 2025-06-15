@@ -74,13 +74,20 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* — Dicho WordCloud “flotante” va fuera del div que maneja background-image — */}
-      <div className="md:hidden absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-30">
+      {/* WordCloud para mobile */}
+
+      {/* WordCloud para mobile */}
+      <div className="md:hidden absolute bottom-4 right-4 w-[80vw] max-w-xs h-[220px] opacity-40 overflow-hidden">
         <WordCloud />
       </div>
-      <div className="hidden md:block absolute bottom-10 left-1/2 w-[800px] h-[400px] opacity-40">
+
+
+      {/* WordCloud para desktop */}
+      <div className="hidden md:block absolute bottom-6 right-6 w-[600px] h-[300px] opacity-40 overflow-hidden">
         <WordCloud />
       </div>
+
+
     </section>
   );
 }

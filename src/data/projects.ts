@@ -3,11 +3,17 @@ export type Slide = {
   caption: string;
 };
 
+export type MediaItem = {
+  type: 'image' | 'video';
+  src: string;
+  caption?: string;
+};
+
 export type Project = {
   id: string;
   name: string;
   category: 'mobile' | 'web' | 'desktop';
-  slides: Slide[];
+  media: MediaItem[];      // ahora contiene imágenes y videos mezclados
   tech?: string[];
   url?: string;
   summary?: string;
@@ -16,6 +22,8 @@ export type Project = {
 
 const tappSearch = '/projects/TAPP_search.png';
 const tappPlanned = '/projects/MobileAppiOS.png';
+const tappConfirmation = '/projects/TTPlannedConfirmation.PNG';
+const tappSearchingKanban = '/projects/TTSearchingKanban.PNG';
 const brt = '/projects/BRT.png';
 const pcapp = '/projects/pcApp.png';
 const lomsA = '/projects/LomsAudit.png';
@@ -27,9 +35,13 @@ export const projects: Project[] = [
     id: 'TT',
     name: 'Tapping Tool NA',
     category: 'mobile',
-    slides: [
-      { img: tappSearch, caption: "Quick lookup of kanban materials across trailers or overflow zones, including real-time box availability." },
-      { img: tappPlanned, caption: 'Weekly view of planned tappings with color-coded status: completed, pending, overdue, partial, or not found — helping identify pending actions at a glance.'},
+    media: [
+      { type: 'image', src: tappSearch, caption: "Quick lookup of kanban materials across trailers or overflow zones, including real-time box availability." },
+      { type: 'image', src: tappPlanned, caption: 'Weekly view of planned tappings with color-coded status: completed, pending, overdue, partial, or not found — helping identify pending actions at a glance.'},
+      { type: 'image', src: tappConfirmation, caption: 'Weekly view of planned tappings with color-coded status: completed, pending, overdue, partial, or not found — helping identify pending actions at a glance.'},
+      { type: 'image', src: tappSearchingKanban , caption: 'Weekly view of planned tappings with color-coded status: completed, pending, overdue, partial, or not found — helping identify pending actions at a glance.'},
+      { type: 'video', src: '/TNPExample.MP4' , caption: 'Unplanned Tapping Demo.'},
+      { type: 'video', src: '/TappingPlannedConfirmPoka.MP4' , caption: 'Planned Tapping Demo.'},
     ],
     tech: ['SwiftUI', 'SQL Server', 'ASP .net'],
     url: 'https://play.google.com/…',
@@ -41,24 +53,25 @@ export const projects: Project[] = [
     'Improved traceability and fulfillment of planned deliveries using color-coded status indicators',
     'Integrated live trailer search and kanban tracking from multiple systems',
     'Currently under regional rollout with TMNA and TMMTX developers'
-    ]
+    ],
+    
   },
   // …más proyectos…
   {
     id: 'BRT',
     name: 'Broadcast Reorder',
     category: 'mobile',
-    slides: [
+    media: [
       {
-        img: brt,
+        type: 'image', src: brt,
         caption: 'Part detail screen: image, description, current stock, and quantity input.'
       },
       {
-        img: brt,
+        type: 'image', src: brt,
         caption: 'Main screen: searchable, filterable list of parts in real time.'
       },
       {
-        img: brt,
+        type: 'image', src: brt,
         caption: 'Part View: menu activated, View with part selected.'
       },
     ],
@@ -79,21 +92,25 @@ export const projects: Project[] = [
     id: 'PCApp',
     name: 'Production Control APP',
     category: 'mobile',
-    slides: [
+    media: [
       {
-        img: pcapp,
+        type: 'image', src: pcapp,
         caption: 'Hour-by-hour dashboard: real-time summary of production across three shops.',
       },
       {
-        img: tappPlanned,
+        type: 'image', src: tappPlanned,
         caption: 'Shop detail view: see breakdown comments and drill down into specific events.',
       },
       {
-        img: tappPlanned,
+        type: 'image', src: tappPlanned,
         caption: 'Major breakdown entry screen: log a production stoppage that automatically updates hour-by-hour totals.',
       },
       {
-        img: tappPlanned,
+        type: 'image', src: tappPlanned,
+        caption: 'Push notification alert: immediate real-time notification when a breakdown or production change occurs.',
+      },
+      {
+        type: 'video', src: '/PCAppVideo1.MP4',
         caption: 'Push notification alert: immediate real-time notification when a breakdown or production change occurs.',
       },
     ],
@@ -108,19 +125,20 @@ export const projects: Project[] = [
       'Push notifications for line stoppages and production changes ensure supervisors can react immediately.',
       'Eliminated reliance on multiple Excel files—now all reports are secure in SQL Server and visualized via Power BI.',
       'Zero manual reconciliation at month-end: accurate, auditable production records stored centrally.'
-    ]
+    ],
+    
   },
   {
     id: 'TP',
     name: 'Trial Parts',
     category: 'mobile',
-    slides: [
+    media: [
       {
-        img: trialBOS,
+        type: 'video', src: trialBOS,
         caption: 'Box scanning screen: scan a box and enter the number of parts received in the pop-up.'
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Discrepancy report: scan the box to populate main fields and attach up to four photos of any discrepancy.'
       },
     ],
@@ -140,13 +158,13 @@ export const projects: Project[] = [
     id: 'IMS',
     name: 'Inventory Management Systems (Rack control)',
     category: 'mobile',
-    slides: [
+    media: [
       {
-        img: imsShop,
+        type: 'video', src: imsShop,
         caption: 'Rack detail view: scan a rack to update its fill level and location instantly.'
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Menu of location scan',
       },
     ],
@@ -166,13 +184,13 @@ export const projects: Project[] = [
     id: 'LOMS',
     name: 'Local Overflow Managemnt System',
     category: 'mobile',
-    slides: [
+    media: [
       {
-        img: lomsA,
+        type: 'video', src: lomsA,
         caption: 'Real-time inventory list: scan list items .'
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Audit mode: scan to update stock, with poka-yokes to prevent duplicate entries.'
       },
     ],
@@ -193,13 +211,13 @@ export const projects: Project[] = [
     id: 'ECIM',
     name: 'ECI Management',
     category: 'web',
-    slides: [
+    media: [
       {
-        img: lomsA,
+        type: 'video', src: lomsA,
         caption: 'Main dashboard: list of pending ECIs with status for each department.'
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Upload screen: departments submit evidence files and update change status.'
       }
     ],
@@ -218,13 +236,13 @@ export const projects: Project[] = [
     id: 'EAMMPF',
     name: 'Portfolio',
     category: 'web',
-    slides: [
+    media: [
       {
-        img: lomsA,
+        type: 'video', src: lomsA,
         caption: 'Home screen: responsive hero section with animations and dark mode support.'
     },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Projects carousel: showcases all project cards filterable by category.'
     },
     ],
@@ -246,13 +264,13 @@ export const projects: Project[] = [
     id: 'LOMSD',
     name: 'LOMS Desktop',
     category: 'desktop',
-    slides: [
+    media: [
       {
-        img: lomsA,
+        type: 'video', src: lomsA,
         caption: 'Pantalla de listas con drag-and-drop.',
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Editor de tareas con voz y etiquetas.',
       },
     ],
@@ -271,94 +289,90 @@ export const projects: Project[] = [
     id: 'IMSD',
     name: 'IMS Desktop',
     category: 'desktop',
-    slides: [
+    media: [
       {
-        img: lomsA,
-        caption: 'Graficas de inventario en tiempo real.',
-      },
+        type: 'video', src: lomsA,
+        caption: 'Real-time inventory charts for material racks.'
+    },
       {
-        img: tappPlanned,
-        caption: 'Administracion de numeros de parte de los racks',
-      },
+        type: 'video', src: tappPlanned,
+        caption: 'Manage rack part numbers and locations.'
+    },
     ],
     tech: ['Python', 'SQL Server'],
     url: 'https://play.google.com/…',
     summary:
-    'Desktop application for real-time tracking and management of material racks in Press shop and expansion areas—syncs with the mobile app so you can scan inventory on the go and visualize total material in a friendly Chart.',
+      'Desktop application for real-time tracking and management of material racks in press shop and expansion areas—syncs with the mobile app so you can scan inventory on the go and view total material quantities in interactive charts.',
     highlights: [
-      'Reduced manual zone searches from 15 minutes down to 1 minute via filtered zone/kanban lookup in the main screen.',
-      'Connected to the mobile app: each scan updates the desktop’s graph view of all locations and racks in real time.',
-      'Design and print QR codes for new parts numbers.',
-      'Admin module to add new parts, configure colors, new users, new locations',
+      'Reduced manual zone searches from 15 minutes to just 1 minute with filtered zone/Kanban lookup on the main screen.',
+      'Connected to the mobile app: each scan updates the desktop’s chart view of all rack locations in real time.',
+      'Generate and print QR codes for new part numbers to streamline scanning.',
+      'Admin module to add new parts, configure rack colors, manage users, and define new locations.'
     ]
   },
   {
     id: 'TPD',
     name: 'Trial Parts Desktop',
     category: 'desktop',
-    slides: [
+    media: [
       {
-        img: lomsA,
+        type: 'video', src: lomsA,
         caption: 'Pantalla de listas con drag-and-drop.',
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Editor de tareas con voz y etiquetas.',
       },
     ],
     tech: ['React Native', 'Expo'],
-    url: 'https://play.google.com/…',
   },
   {
     id: 'TTD',
     name: 'Taping Tool Desktop',
     category: 'desktop',
-    slides: [
+    media: [
       {
-        img: lomsA,
+        type: 'video', src: lomsA,
         caption: 'Pantalla de listas con drag-and-drop.',
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Editor de tareas con voz y etiquetas.',
       },
     ],
     tech: ['React Native', 'Expo'],
-    url: 'https://play.google.com/…',
   },
   {
     id: 'PCD',
     name: 'PC APP Desktop',
     category: 'desktop',
-    slides: [
+    media: [
       {
-        img: lomsA,
+        type: 'video', src: lomsA,
         caption: 'Pantalla de listas con drag-and-drop.',
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Editor de tareas con voz y etiquetas.',
       },
     ],
     tech: ['React Native', 'Expo'],
-    url: 'https://play.google.com/…',
   },
   {
     id: 'BRTD',
     name: 'Broadcast Tool Desktop',
     category: 'desktop',
-    slides: [
+    media: [
       {
-        img: lomsA,
+        type: 'video', src: lomsA,
         caption: 'Pantalla de listas con drag-and-drop.',
       },
       {
-        img: tappPlanned,
+        type: 'video', src: tappPlanned,
         caption: 'Editor de tareas con voz y etiquetas.',
       },
     ],
     tech: ['React Native', 'Expo'],
-    url: 'https://play.google.com/…',
   },
 ];
 
