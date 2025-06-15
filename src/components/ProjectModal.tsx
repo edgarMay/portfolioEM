@@ -11,8 +11,10 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  // Valores por defecto para no lidiar con "undefined"
   const highlights = project.highlights ?? [];
-  const media = project.media ?? [];
+  const media = project.media;
+
   return (
     <Modal
       isOpen
@@ -32,7 +34,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       </button>
 
       {/* cabecera */}
-      <header className="px-10 pt-10 mb-9">  
+      <header className="px-10 pt-10 mb-9">
         <p className="text-xs font-semibold uppercase tracking-wider text-indigo-500">
           {project.category}
         </p>
@@ -66,7 +68,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         )}
 
         {/* Media: imágenes y videos en un solo flujo */}
-        {project.media.map((m: MediaItem, i: number) => (
+        {media.map((m: MediaItem, i: number) => (
           <div key={i} className="bg-gray-100 dark:bg-slate-800 rounded-2xl p-8">
             <div
               className={`flex flex-col md:flex-row ${
@@ -91,7 +93,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     className="w-full rounded-lg shadow-md object-contain"
                   />
                 ) : (
-                  <VideoPlayer videoUrl={m.src} />
+                  <VideoPlayer videoUrl={m.src} inline />
                 )}
               </div>
             </div>
@@ -99,7 +101,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         ))}
 
         {/* Enlace externo solo si no hay media */}
-        {project.url && project.media.length === 0 && (
+        {project.url && media.length === 0 && (
           <div className="px-10 pt-6">
             <a
               href={project.url}
@@ -109,7 +111,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                          bg-indigo-600 text-white 
                          rounded hover:bg-indigo-700 transition"
             >
-              Ver Video
+              Ver video
             </a>
           </div>
         )}
