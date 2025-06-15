@@ -1,8 +1,12 @@
+// src/components/StoryOverlay.tsx
 import { Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';   // pequeño modal accesible
-import type { Project } from '../data/projects.js';
+import { Dialog, Transition } from '@headlessui/react';
+import type { Project, MediaItem } from '../data/projects';
 
-type Props = { project: Project; onClose: () => void };
+interface Props {
+  project: Project;
+  onClose: () => void;
+}
 
 export default function StoryOverlay({ project, onClose }: Props) {
   return (
@@ -46,32 +50,44 @@ export default function StoryOverlay({ project, onClose }: Props) {
                 <p className="text-xs font-semibold uppercase tracking-wider text-indigo-500">
                   {project.category}
                 </p>
-                <Dialog.Title className="text-3xl font-extrabold mt-2 mb-1">
+                <Dialog.Title className="text-3xl font-extrabold mt-2 mb-1 text-gray-900 dark:text-gray-100">
                   {project.name}
                 </Dialog.Title>
               </header>
 
               {/* Contenido scrollable */}
               <div className="mt-6 space-y-20 px-10 pb-20">
-                {project.slides.map((s, i) => (
+                {project.media.map((m: MediaItem, i: number) => (
                   <div
                     key={i}
                     className={`grid gap-10 items-center ${
-                      i % 2 === 0 ? 'md:grid-cols-2' : 'md:grid-cols-2 md:flex-row-reverse'
+                      i % 2 === 0
+                        ? 'md:grid-cols-2'
+                        : 'md:grid-cols-2 md:flex-row-reverse'
                     }`}
                   >
                     {/* Texto */}
-                    <div className="text-lg leading-relaxed">
-                      <p className="whitespace-pre-line">{s.caption}</p>
-                    </div>
+                    {m.caption && (
+                      <div className="text-lg leading-relaxed text-gray-800 dark:text-gray-200">
+                        <p className="whitespace-pre-line">{m.caption}</p>
+                      </div>
+                    )}
 
-                    {/* Imagen */}
+                    {/* Imagen o Video */}
                     <div>
-                      <img
-                        src={s.img}
-                        alt={`${project.name} screenshot ${i + 1}`}
-                        className="w-full rounded-lg shadow-md object-contain"
-                      />
+                      {m.type === 'image' ? (
+                        <img
+                          src={m.src}
+                          alt={m.caption ?? `${project.name} media ${i + 1}`}
+                          className="w-full rounded-lg shadow-md object-contain"
+                        />
+                      ) : (
+                        <video
+                          src={m.src}
+                          controls
+                          className="w-full rounded-lg shadow-md max-h-[60vh] object-contain"
+                        />
+                      )}
                     </div>
                   </div>
                 ))}
